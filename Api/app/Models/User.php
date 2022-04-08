@@ -26,6 +26,7 @@ class User extends Authenticatable
         'referral_code',
         'wallet_balance',
         'profile_picture',
+        'role_id',
     ];
 
     /**

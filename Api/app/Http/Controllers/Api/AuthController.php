@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class AuthController extends Controller
             'full_name' => $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'role_id' => Role::where('title', 'User')->first()->id,
+            'role_id' => Role::where('title', 'User')->first()->id,
             'profile_picture' => config('app.default_profile_picture.path').substr($request->username, 0, 2).config('app.default_profile_picture.background'),
             'referral_code' => Str::upper(Str::random(10)),
         ]);
@@ -110,7 +111,7 @@ class AuthController extends Controller
             }
         );
         return $status === Password::PASSWORD_RESET
-                    ? (['success' => __($status)])
-                    : (['fail' => [__($status)]]);
+                    ? (view('Auth.reset-success'))
+                    : (['fail' => __($status)]);
     }
 }

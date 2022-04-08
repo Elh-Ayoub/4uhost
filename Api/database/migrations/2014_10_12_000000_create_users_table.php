@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer("referral_points")->default(0);
             $table->string('referral_code')->unique();
             $table->integer("wallet_balance")->default(0);
+            $table->integer("role_id");
             $table->rememberToken();
             $table->timestamps();
         });
