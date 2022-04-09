@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,12 +34,25 @@ Route::middleware('auth.check')->group(function(){
     Route::get("admin/auth/forgot-password", function(){return view('Auth.forget_password');})->name('forget_password.view');
     Route::post("admin/auth/forgot-password", [AdminAuthController::class, "sendResetLink"])->name('forget_password.send');
 });
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get("admin/dashboard", function(){
+
+Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function () {
+    //dashboard
+    Route::get("dashboard", function(){
         $admin_id = Role::where('title', 'Admin')->first()->id;
         $user_id = Role::where('title', 'User')->first()->id;
         $admins = User::where('role_id', $admin_id)->get();
         $users = User::where('role_id', $user_id)->get();
         return view('dashboard', ['admins' => count($admins), 'users' => count($users)]);
     })->name('dashboard');
+
+    /////////////////////// ----User module---- ///////////////////////
+    Route::get('users', [AdminUserController::class, 'index'])->name('users.admin');
+    Route::post('users', [AdminUserController::class, 'store'])->name('users.admin.store');
+    Route::get('users/{id}',[AdminUserController::class, 'show'])->name("users.show");
+    Route::patch('users/{id}/password', [AdminUserController::class, 'updatePassword'])->name('users.password.update');
+    Route::patch('users/{id}/avatar', [AdminUserController::class, 'UpdateAvatar'])->name('users.update.avatar');
+    Route::delete('users/{id}/avatar', [AdminUserController::class, 'setDefaultAvatar'])->name('users.delete.avatar');
+    Route::patch('users/{id}',[AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('users/{id}',[AdminUserController::class, 'destroy'])->name('users.delete');
+
 });
