@@ -29,11 +29,15 @@ Route::post('auth/forgot-password',[AuthController::class, 'sendResetLink']);
 Route::patch('auth/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
 /////////////////////// ----User module---- ///////////////////////
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get("/users", [UserController::class, 'index']);
-    Route::get("/users/{id}", [UserController::class, 'show']);
-    Route::patch("/users/{id}", [UserController::class, 'update']);
-    Route::patch("/users/{id}/password", [UserController::class, 'updatePassword']);
-    Route::delete("/users/{id}/avatar", [UserController::class, 'setDefaultAvatar']);
-    Route::delete("/users/{id}", [UserController::class, 'destroy']);
-});
+
+Route::get("/users", [UserController::class, 'index']);
+Route::get("/users/{id}", [UserController::class, 'show']);
+Route::patch("/users/{id}", [UserController::class, 'update'])->middleware('auth:sanctum');
+Route::patch("/users/{id}/password", [UserController::class, 'updatePassword'])->middleware('auth:sanctum');
+Route::delete("/users/{id}/avatar", [UserController::class, 'setDefaultAvatar'])->middleware('auth:sanctum');
+Route::delete("/users/{id}", [UserController::class, 'destroy'])->middleware('auth:sanctum');
+
+/////////////////////// ----Role module---- ///////////////////////
+Route::get("/roles", [RoleController::class, 'index']);
+Route::get("/roles/{id}", [RoleController::class, 'show']);
+Route::get("/roles/{id}/users", [RoleController::class, 'getUsersByRoleId']);

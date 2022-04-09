@@ -10,7 +10,7 @@
                 <img src="{{Auth::user()->profile_picture}}" class="img-circle elevation-2" alt="User-Image">
             </div>
             <div class="info">
-                <a href="" class="d-block">{{Auth::user()->username}}</a>
+                <a href="{{route("users.show", Auth::id())}}" class="d-block">{{Auth::user()->username}}</a>
             </div>
         </div>
         @endif
@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('roles.admin')}}" class="nav-link @if(Request::url() === route('roles.admin')) active @endif">
                     <i class="fa fa-tag"></i>
                     <p>Manage roles</p>
                 </a>
