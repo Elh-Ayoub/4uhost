@@ -57,7 +57,7 @@
                         <b>Role</b> <a class="float-right">{{App\Models\Role::find($user->role_id)->title}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Rating</b> <a class="float-right">{{$user->rating}}</a>
+                        <b>Balence</b> <a class="float-right">{{$user->wallet_balance}}</a>
                     </li>
                     <form action="{{route('users.update.avatar', $user->id)}}" method="POST" class="form-group row mt-2" enctype="multipart/form-data">
                         @csrf
@@ -89,6 +89,7 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Info</a></li>
                     <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">password</a></li>            
+                    <li class="nav-item"><a class="nav-link" href="#wallet" data-toggle="tab">Wallet</a></li>            
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -160,6 +161,26 @@
                               <button type="submit" class="btn btn-warning mt-3">Save</button>
                           </div> 
                       </form>
+                    </div>
+                    <div class="tab-pane" id="wallet">
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">Wallet balence</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" value="{{$user->wallet_balance}}" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">Referral points</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" value="{{$user->referral_points}}" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">Referral balence</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" value="{{$user->referral_points * $value_of_referral_points}}" readonly>
+                          </div>
+                        </div>
                     </div>
                   <!-- /.tab-pane -->
                 </div>

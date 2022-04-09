@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentSettings;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
@@ -28,7 +29,14 @@ class AuthController extends Controller
         if($validator->fails()){
             return ($validator->errors()->toArray());
         }
-
+        if($request->referral_code){
+            $referral = User::where('referral_code', $request->referral_code)->first();
+            if($referral){
+                $points = PaymentSettings::where('title', 'number_of_points_for_referral')->first()->value;
+                $points += $referral->referral_points; 
+                $referral->update(['referral_points' => $points]);
+            }
+        }
         $user = User::create([
             'username' => $request->username,
             'full_name' => $request->full_name,

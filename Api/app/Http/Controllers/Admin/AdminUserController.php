@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Controller;
+use App\Models\PaymentSettings;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -29,7 +30,10 @@ class AdminUserController extends Controller
         if(!$user){
             return back()->with('fail', 'User not found!');
         }
-        return view('Users.profile', ['user' => $user]);
+        $settings = PaymentSettings::where('title', 'value_of_referral_points')->first();
+        
+        $value_of_referral_points = ($settings) ? PaymentSettings::where('title', 'value_of_referral_points')->first()->value : (config('payment.value_of_referral_points'));
+        return view('Users.profile', ['user' => $user, 'value_of_referral_points' => $value_of_referral_points]);
     }
 
     public function store(Request $request){

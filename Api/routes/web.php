@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminPaymentSettings;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Models\Role;
@@ -61,4 +62,8 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     Route::post('roles', [AdminRoleController::class, 'store'])->name('roles.admin.create');
     Route::patch('roles/{id}', [AdminRoleController::class, 'update'])->name('roles.admin.update');
     Route::delete('roles/{id}', [AdminRoleController::class, 'destroy'])->name('roles.admin.delete');
+
+    /////////////////////// ----Payment settings---- ///////////////////////
+    Route::get('payment-settings', [AdminPaymentSettings::class, 'index'])->name('payment.settings');
+    Route::patch('payment-settings/{id}', [AdminPaymentSettings::class, 'update'])->name('payment.settings.update');
 });

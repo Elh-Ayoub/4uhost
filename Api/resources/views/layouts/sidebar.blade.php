@@ -44,6 +44,12 @@
                     <p>Manage roles</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('payment.settings')}}" class="nav-link @if(Request::url() === route('payment.settings')) active @endif">
+                    <i class="fas fa-money-bill"></i>
+                    <p>Payment settings</p>
+                </a>
+            </li>
             </ul>
         </nav>
     </div>
