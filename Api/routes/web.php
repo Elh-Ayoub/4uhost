@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminPaymentSettings;
+use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Models\Role;
@@ -66,4 +67,11 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     /////////////////////// ----Payment settings---- ///////////////////////
     Route::get('payment-settings', [AdminPaymentSettings::class, 'index'])->name('payment.settings');
     Route::patch('payment-settings/{id}', [AdminPaymentSettings::class, 'update'])->name('payment.settings.update');
+
+    /////////////////////// ----Hosting plans module---- ///////////////////////
+    Route::get('plans/storage', [AdminPlanController::class, 'storagePlans'])->name('storage.plans');
+    Route::get('plans/web-hosting', [AdminPlanController::class, 'webHostingPlans'])->name('webHosting.plans');
+    Route::get('plans/emails', [AdminPlanController::class, 'emailPlans'])->name('email.plans');
+    Route::get('plans/domains', [AdminPlanController::class, 'domainsPlans'])->name('domains.plans');
+    Route::get('plans/backup', [AdminPlanController::class, 'backupPlans'])->name('backup.plans');
 });

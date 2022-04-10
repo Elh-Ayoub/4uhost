@@ -50,6 +50,47 @@
                     <p>Payment settings</p>
                 </a>
             </li>
+            <li class="nav-item @if(Str::contains(Request::url(), 'plans')) menu-open @endif">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-clipboard-list pr-1"></i>
+                  <p>
+                    Hosting Plans
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('storage.plans')}}" class="nav-link @if(Request::url() === route('storage.plans')) active @endif">
+                      <i class="fas fa-box-open nav-icon"></i>
+                      <p>Storage Plans</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('webHosting.plans')}}" class="nav-link @if(Request::url() === route('webHosting.plans')) active @endif">
+                        <i class="fas fa-server nav-icon"></i>
+                      <p>Web Hosting Plans</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('email.plans')}}" class="nav-link @if(Request::url() === route('email.plans')) active @endif">
+                        <i class="fas fa-at nav-icon"></i>
+                      <p>Email Plans</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('domains.plans')}}" class="nav-link @if(Request::url() === route('domains.plans')) active @endif">
+                        <i class="fas fa-user-tag nav-icon"></i>
+                      <p>Domains</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('backup.plans')}}" class="nav-link @if(Request::url() === route('backup.plans')) active @endif">
+                        <i class="fas fa-undo nav-icon"></i>
+                      <p>Backup plans</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
         </nav>
     </div>
