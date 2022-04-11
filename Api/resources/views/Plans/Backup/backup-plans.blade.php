@@ -35,15 +35,13 @@
                 </div>
             </div>
             <section class="content">
-                <div class="row mb-3 ml-1">
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#create-plan"><i class="fas fa-plus mr-2"></i> Create new backup plan</button>  
-                </div>
                 <table class="table table-striped table-bordered">
                     <thead class="bg-warning">
                         <tr>
                             <th>Backup rate</th>
                             <th>Price</th>
                             <th>Duration</th>
+                            <th class="text-center">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,12 +50,16 @@
                             <td>{{$plan->backup_rate}}</td>
                             <td>{{$plan->price}} rs</td>
                             <td>Per {{$plan->duration}}</td>
+                            <td class="row justify-content-center">
+                                <button class="btn btn-outline-warning mr-3" data-toggle="modal" data-target="#update-backup-plan-{{$plan->id}}"><i class="fas fa-pen"></i></button>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </section>
         </div>
+        @include('Plans.Backup.modals')
         @include('layouts.footer')
     </div>
 <!-- jQuery -->
