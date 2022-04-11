@@ -24,7 +24,9 @@ class AdminPlanController extends Controller
     }
 
     public function emailPlans(){
-        $email_plans = Plan::where('name', 'Email plans')->get();
+        $limited_email_plans = Plan::where(['name' => 'Email plans', 'type' => 'limited'])->get()->sortby('quantity')->sortby('duration');
+        $unlimited_emails_plans =Plan::where(['name' => 'Email plans', 'type' => 'unlimited'])->get();
+        $email_plans = $limited_email_plans->merge($unlimited_emails_plans);
         return view('Plans.Email.email-plans', ['email_plans' => $email_plans]);
     }
 

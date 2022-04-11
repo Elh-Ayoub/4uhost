@@ -1,13 +1,13 @@
-<div id="create-web-hosting-plan" class="modal fade">
+<div id="create-emails-plan" class="modal fade">
     <div class="modal-dialog">
         <form class="modal-content" method="POST" action="{{route('plans.store')}}">
             @csrf
             <div class="modal-header bg-warning">
-                <h5 class="modal-title">Create new web hosting plan</h5>
+                <h5 class="modal-title">Create new emails plan</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <input type="hidden" value="Web hosting plans" name="name">
+                <input type="hidden" value="Email plans" name="name">
                 <div class="input-group mb-3">
                     <select name="type" class="form-control custom-select plan_type">
                         <option value="limited" selected>Limited</option>
@@ -15,7 +15,7 @@
                     </select>
                 </div>
                 <div class="input-group mb-3 input_quantity">
-                    <input type="number" class="form-control" step="1" placeholder="Number of websites" name="quantity">
+                    <input type="number" class="form-control" step="1" placeholder="Number of emails" name="quantity">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <i class="fas fa-hdd"></i>
@@ -44,14 +44,14 @@
         </form>
     </div>
 </div>
-@foreach ($web_hosting as $plan)
-<div id="update-web-hosting-plan-{{$plan->id}}" class="modal fade">
+@foreach ($email_plans as $plan)
+<div id="update-emails-plan-{{$plan->id}}" class="modal fade">
     <div class="modal-dialog">
         <form class="modal-content" method="POST" action="{{route('plans.update', $plan->id)}}">
             @csrf
             @method('PATCH')
             <div class="modal-header bg-warning">
-                <h5 class="modal-title">Update a web hosting plans</h5>
+                <h5 class="modal-title">Update an email plan</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -62,7 +62,7 @@
                     </select>
                 </div>
                 <div class="input-group mb-3 input_quantity">
-                    <input type="number" class="form-control" step="1" placeholder="Number of websites" name="quantity" value="{{$plan->quantity}}">
+                    <input type="number" class="form-control" step="1" placeholder="Number of emails" name="quantity" value="{{$plan->quantity}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <i class="fas fa-hdd"></i>
@@ -91,9 +91,9 @@
         </form>
     </div>
 </div>
-<div id="delete-web-hosting-plan-{{$plan->id}}" class="modal fade">
+<div id="delete-emails-plan-{{$plan->id}}" class="modal fade">
     <div class="modal-dialog">
-        <form class="modal-content bg-danger" method="POST" action="{{route('plans.delete', $plan->id)}}" >
+        <form class="modal-content bg-danger" method="POST" action="{{route('plans.delete', $plan->id)}}">
             @csrf
             @method('DELETE')
             <div class="modal-header">
@@ -101,7 +101,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body ">
-                <p>You're about to delete a Web hosting plan.</p>
+                <p>You're about to delete an email plan.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
