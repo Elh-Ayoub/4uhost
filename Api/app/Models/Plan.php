@@ -16,5 +16,6 @@ class Plan extends Model
         'duration',
         'type',
         'discount',
+        'backup_rate',
     ];
 }

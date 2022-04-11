@@ -20,3 +20,15 @@ $("#choosefile").change(function(){
 $('#SubmitInfoForm').click(function(){
     $('#infoForm').submit();
 })
+
+/*
+    Hide quantity input while selecting unlimited plan type
+*/
+
+$(".plan_type").change(function (e) { 
+    if(e.target.value == 'unlimited'){
+        $(".input_quantity").fadeOut();
+    }else{
+        $(".input_quantity").fadeIn();
+    }
+});

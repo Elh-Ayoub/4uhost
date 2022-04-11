@@ -74,4 +74,8 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     Route::get('plans/emails', [AdminPlanController::class, 'emailPlans'])->name('email.plans');
     Route::get('plans/domains', [AdminPlanController::class, 'domainsPlans'])->name('domains.plans');
     Route::get('plans/backup', [AdminPlanController::class, 'backupPlans'])->name('backup.plans');
+    
+    Route::post('plans', [AdminPlanController::class, 'store'])->name('plans.store');
+    Route::patch('plans/{id}', [AdminPlanController::class, 'update'])->name('plans.update');
+    Route::delete('plans/{id}', [AdminPlanController::class, 'destroy'])->name('plans.delete');
 });
