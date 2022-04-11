@@ -17,7 +17,9 @@ class AdminPlanController extends Controller
     }
 
     public function webHostingPlans(){
-        $web_hosting = Plan::where('name', 'Web hosting plans')->get();
+        $limited_web_hosting = Plan::where(['name' => 'Web hosting plans', 'type' => 'limited'])->get()->sortby('quantity')->sortby('duration');
+        $unlimited_web_hosting = Plan::where(['name' => 'Web hosting plans', 'type' => 'unlimited'])->get();
+        $web_hosting = $limited_web_hosting->merge($unlimited_web_hosting);
         return view('Plans.Web-hosting.web-hosting', ['web_hosting' => $web_hosting]);
     }
 
