@@ -91,6 +91,12 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a href="{{route('purchases')}}" class="nav-link @if(Request::url() === route('purchases')) active @endif">
+                  <i class="fas fa-cash-register"></i>
+                  <p>Purchases</p>
+                </a>
+              </li>
             </ul>
         </nav>
     </div>

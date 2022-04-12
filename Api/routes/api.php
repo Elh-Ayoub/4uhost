@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,6 @@ Route::post("/users/{id}/fill-wallet", [UserController::class, 'fillWallet'])->m
 Route::get("/roles", [RoleController::class, 'index']);
 Route::get("/roles/{id}", [RoleController::class, 'show']);
 Route::get("/roles/{id}/users", [RoleController::class, 'getUsersByRoleId']);
+
+/////////////////////// ----Purchase module---- ///////////////////////
+Route::post('/purchase', [PurchaseController::class, 'store'])->middleware('auth:sanctum');

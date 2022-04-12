@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminPaymentSettings;
 use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Models\Purchase;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,4 +80,9 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     Route::post('plans', [AdminPlanController::class, 'store'])->name('plans.store');
     Route::patch('plans/{id}', [AdminPlanController::class, 'update'])->name('plans.update');
     Route::delete('plans/{id}', [AdminPlanController::class, 'destroy'])->name('plans.delete');
+
+    /////////////////////// ----Purchase module---- ///////////////////////
+    Route::get('purchases', function(){
+        return view('Purchases.purchases', ['purchases' => Purchase::orderBy('created_at', 'desc')->simplePaginate(15)]);
+    })->name('purchases');
 });
