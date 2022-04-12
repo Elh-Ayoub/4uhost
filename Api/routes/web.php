@@ -57,7 +57,8 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     Route::delete('users/{id}/avatar', [AdminUserController::class, 'setDefaultAvatar'])->name('users.delete.avatar');
     Route::patch('users/{id}',[AdminUserController::class, 'update'])->name('users.update');
     Route::delete('users/{id}',[AdminUserController::class, 'destroy'])->name('users.delete');
-
+    //wallet
+    Route::post("/users/{id}/fill-wallet", [AdminUserController::class, 'fillWallet'])->name('add.balance');
     /////////////////////// ----Role module---- ///////////////////////
     Route::get('roles', [AdminRoleController::class, 'index'])->name('roles.admin');
     Route::post('roles', [AdminRoleController::class, 'store'])->name('roles.admin.create');

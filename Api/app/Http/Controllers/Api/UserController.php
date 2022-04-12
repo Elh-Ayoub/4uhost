@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Stripe;
 
 class UserController extends Controller
 {
@@ -106,5 +107,37 @@ class UserController extends Controller
         }
         $user->delete();
         return response(['status' => 'success', 'message' => 'User deleted successfully!']);
+    }
+
+    public function fillWallet(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required|numeric',
+        ]);
+        if($validator->fails()){
+            return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
+        }
+        $user = User::find($id);
+        if(!$user){
+            return response(['status' => 'fail', 'message' => "User not found!"], 404);
+        }
+        if($request->amount < 100){
+            return response(['status' => 'fail', 'message' => "Minimum amount is 100 rs"], 400);
+        }
+
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $payment = Stripe\Charge::create ([
+                "amount" => $request->amount * 100,
+                "currency" => "INR",
+                "source" => $request->stripeToken,
+                "description" => "Charging wallet: #" . $user->id . ", username: " . $user->username,
+        ]);
+        if($payment){
+            $wallet_balance = $user->wallet_balance + $request->amount;
+            $user->update([
+                'wallet_balance' => $wallet_balance,
+            ]);
+            return response(['status' => 'success', 'message' => "Wallet has been charged successfully!"]);
+        }
+        return response(['status' => 'fail', 'message' => "Insufficient available balance, or invalid or expired card"], 400);
     }
 }

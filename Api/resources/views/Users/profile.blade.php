@@ -13,6 +13,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/logo.png')}}"/>
+  <style type="text/css">.panel-title {display: inline;font-weight: bold;}.display-table {display: table;}.display-tr {display: table-row;}
+    .display-td {display: table-cell;vertical-align: middle;width: 61%;}</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -181,6 +183,7 @@
                             <input type="email" class="form-control" value="{{$user->referral_points * $value_of_referral_points}}" readonly>
                           </div>
                         </div>
+                        <button class="btn btn-primary mt-2"  data-toggle="modal" data-target="#add-balence-{{$user->id}}">Add wallet balance</button>
                     </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -217,6 +220,7 @@
         </div>
     </div>
   </div>
+  @include('Users.payment-modal')
   @include('layouts.footer')
 </div>
 <!-- jQuery -->
@@ -225,7 +229,9 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script src="{{asset('js/helper.js')}}"></script>
+<script src="{{asset('js/stripe-payment.js')}}"></script>
 @include('layouts.toastrs')
 </body>
 </html>

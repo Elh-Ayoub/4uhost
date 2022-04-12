@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Str;
+use Stripe;
 
 class AdminUserController extends Controller
 {
@@ -127,6 +128,20 @@ class AdminUserController extends Controller
             return back()->with('success', $res->message);
         }else{
             return back()->with('fail-arr', $res->message);
+        }
+    }
+
+    public function fillWallet(Request $request, $id){
+        $userController = new UserController;
+        $response = $userController->fillWallet($request, $id);
+        $res = json_decode($response->content());
+
+        if($res->status == "success"){
+            return back()->with('success', $res->message);
+        }else if($res->status == "fail-arr"){
+            return back()->with('fail-arr', $res->message);
+        }else{
+            return back()->with('fail', $res->message);
         }
     }
 }

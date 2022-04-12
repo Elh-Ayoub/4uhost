@@ -36,6 +36,8 @@ Route::patch("/users/{id}", [UserController::class, 'update'])->middleware('auth
 Route::patch("/users/{id}/password", [UserController::class, 'updatePassword'])->middleware('auth:sanctum');
 Route::delete("/users/{id}/avatar", [UserController::class, 'setDefaultAvatar'])->middleware('auth:sanctum');
 Route::delete("/users/{id}", [UserController::class, 'destroy'])->middleware('auth:sanctum');
+//wallet
+Route::post("/users/{id}/fill-wallet", [UserController::class, 'fillWallet'])->middleware('auth:sanctum');
 
 /////////////////////// ----Role module---- ///////////////////////
 Route::get("/roles", [RoleController::class, 'index']);
