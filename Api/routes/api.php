@@ -45,5 +45,15 @@ Route::get("/roles", [RoleController::class, 'index']);
 Route::get("/roles/{id}", [RoleController::class, 'show']);
 Route::get("/roles/{id}/users", [RoleController::class, 'getUsersByRoleId']);
 
+/////////////////////// ----Payment settings---- ///////////////////////
+Route::get("/payment-settings", [PurchaseController::class, 'getPaymentSettings']);
+
+/////////////////////// ----Plans module---- ///////////////////////
+Route::get("/plans/storage", [PurchaseController::class, 'getStoragePlans']);
+Route::get("/plans/web-hosting", [PurchaseController::class, 'getWebhostingPlans']);
+Route::get("/plans/emails", [PurchaseController::class, 'getEmailPlans']);
+Route::get("/plans/domains", [PurchaseController::class, 'getDomainPlans']);
+Route::get("/plans/backup", [PurchaseController::class, 'getBackupPlans']);
+
 /////////////////////// ----Purchase module---- ///////////////////////
 Route::post('/purchase', [PurchaseController::class, 'store'])->middleware('auth:sanctum');

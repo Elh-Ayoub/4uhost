@@ -65,11 +65,11 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>0</h3>
-                                        <p>Orders</p>
+                                        <h3>{{$purchases}}</h3>
+                                        <p>Purchases</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="fas fa-box-open"></i>
+                                        <i class="fas fa-cash-register"></i>
                                     </div>
                                     <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>

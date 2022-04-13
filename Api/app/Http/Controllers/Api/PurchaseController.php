@@ -33,6 +33,30 @@ class PurchaseController extends Controller
         if($full_price < $min = PaymentSettings::where('title', 'minimum_total_purchase_price')->first()->value){
             return response(['status' => 'fail', 'message' => 'Minimum full price to purchase is: ' . $min . ' rs'], 400);
         }
+
+        //referral balance
+        if($request->referral_balance){
+            $refPointsValue = PaymentSettings::where('title', 'value_of_referral_points')->first()->value;
+            $maxRefBalance = PaymentSettings::where('title', 'max_referral_balance_in_purchase')->first()->value;
+            $ref_balance = Auth::user()->referral_points * $refPointsValue;
+            if($ref_balance >= $request->referral_balance){
+                if($request->referral_balance <= $maxRefBalance){
+                   $full_price -= $request->referral_balance;
+                   $new_referral_points = Auth::user()->referral_points - ($request->referral_balance / $refPointsValue);
+                    Auth::user()->update([
+                        'referral_points' => $new_referral_points,
+                    ]);
+                }else{
+                    return response(['status' => 'fail', 'message' => 'Referral balance requested more than maximum alowed!'], 400);
+                }
+            }else{
+                return response(['status' => 'fail', 'message' => 'Referral balance not insufficient'], 400);
+            }
+        }
+        // add tax bill  
+        $tax_percentage = PaymentSettings::where('title', 'percentage_tax_in_billing')->first()->value;
+        $full_price += ($full_price * $tax_percentage) / 100;
+
         if(Auth::user()->wallet_balance < $full_price){
             return response(['status' => 'fail', 'message' => 'Wallet balace not insufficient for this purchase'], 400); 
         }else{
@@ -50,5 +74,35 @@ class PurchaseController extends Controller
             return response(['status' => 'success', 'message' => 'Purchase made successfully!']);
         }
         return response(['status' => 'fail', 'message' => 'Something went wromg! Try again.'], 400);
+    }
+
+    public function getPaymentSettings(){
+        return PaymentSettings::all();
+    }
+
+    public function getStoragePlans(){
+        $limited_storage_plans = Plan::where(['name'=> 'Storage plans', 'type' => 'limited'])->get()->sortby('quantity')->sortby('duration');
+        $unlimited_storage_plans = Plan::where(['name'=> 'Storage plans', 'type' => 'unlimited'])->get();
+        return $limited_storage_plans->merge($unlimited_storage_plans);
+    }
+
+    public function getWebhostingPlans(){
+        $limited_web_hosting = Plan::where(['name' => 'Web hosting plans', 'type' => 'limited'])->get()->sortby('quantity')->sortby('duration');
+        $unlimited_web_hosting = Plan::where(['name' => 'Web hosting plans', 'type' => 'unlimited'])->get();
+        return $limited_web_hosting->merge($unlimited_web_hosting);
+    }
+
+    public function getEmailPlans(){
+        $limited_email_plans = Plan::where(['name' => 'Email plans', 'type' => 'limited'])->get()->sortby('quantity')->sortby('duration');
+        $unlimited_emails_plans =Plan::where(['name' => 'Email plans', 'type' => 'unlimited'])->get();
+        return $limited_email_plans->merge($unlimited_emails_plans);
+    }
+
+    public function getDomainPlans(){
+        return Plan::where('name', 'Domains')->get();
+    }
+
+    public function getBackupPlans(){
+        return Plan::where('name', 'Backup plans')->get();
     }
 }

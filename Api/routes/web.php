@@ -46,7 +46,8 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
         $user_id = Role::where('title', 'User')->first()->id;
         $admins = User::where('role_id', $admin_id)->get();
         $users = User::where('role_id', $user_id)->get();
-        return view('dashboard', ['admins' => count($admins), 'users' => count($users)]);
+        $purchases = count(Purchase::all());
+        return view('dashboard', ['admins' => count($admins), 'users' => count($users), 'purchases' => $purchases]);
     })->name('dashboard');
 
     /////////////////////// ----User module---- ///////////////////////
