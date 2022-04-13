@@ -41,4 +41,5 @@ This is a web appilication for domains, hosting plans and storage services
     <li><b>run: php artisan db:seed</b></li>
     <li><b>set mailer settings in .env file</b></li>
     <li><b>serve the project with: php artisan serve</b></li>
+    <li><b>Run scheduler: php artisan schedule:work</b></li>
 </ol>
