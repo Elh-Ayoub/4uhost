@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Stripe;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -139,5 +140,31 @@ class UserController extends Controller
             return response(['status' => 'success', 'message' => "Wallet has been charged successfully!"]);
         }
         return response(['status' => 'fail', 'message' => "Insufficient available balance, or invalid or expired card"], 400);
+    }
+
+    public function contactUs(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'phone_number' => 'required|numeric',
+            'subject' => 'required|string',
+            'name' => 'required|string',
+            'message' => 'required|string',
+        ]);
+        if($validator->fails()){
+            return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
+        }
+
+        $data = [
+            'name' => $request->name,
+            'msg' => $request->message,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'subject' => $request->subject,
+        ];
+        Mail::send('mails.contact', $data, function($message) use($data) {
+            $message->to(env('MAIL_USERNAME'), 'Contact')->subject($data['subject']);
+            $message->from($data['email'], $data['name']);
+        });
+        return response(['status' => 'success', 'message' => "Email sent successfully!"]);
     }
 }

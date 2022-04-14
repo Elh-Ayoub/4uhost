@@ -57,3 +57,6 @@ Route::get("/plans/backup", [PurchaseController::class, 'getBackupPlans']);
 
 /////////////////////// ----Purchase module---- ///////////////////////
 Route::post('/purchase', [PurchaseController::class, 'store'])->middleware('auth:sanctum');
+
+/////////////////////// ---- Contact us ---- ///////////////////////
+Route::post("/contact-us", [UserController::class, 'contactUs']);

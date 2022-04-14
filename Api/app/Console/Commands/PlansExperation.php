@@ -7,6 +7,8 @@ use App\Models\Purchase;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class PlansExperation extends Command
 {
@@ -51,6 +53,23 @@ class PlansExperation extends Command
                             'plans_ids' => $new_plans_ids,
                         ]);
                     }                    
+                }
+
+                //send email remainder 1 week or 1 day before experation
+                if(date('Y-m-d', strtotime("+1 week")) == $experation_date || date('Y-m-d', strtotime("+1 day")) == $experation_date){
+                    $user = User::find($purchase->user_id);
+                    $dur = (date('Y-m-d', strtotime("+1 week")) == $experation_date) ? "1 week" : ("1 day");
+                    $data = [
+                        'msg' => 'Hello! ' . $user->username . ", we want to inform you that a plan you purchased is about ". $dur ." to expire",
+                        'plan' => $plan,
+                        'purchase' => $purchase,
+                        'experation_date' => $experation_date,
+                        'user' => $user,
+                    ];
+                    Mail::send('mails.template', $data, function($message) use($data) {
+                        $message->to($data['user']->email, 'Experation remainder')->subject('Experation remainder');
+                        $message->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                    });
                 }
             }
         }
