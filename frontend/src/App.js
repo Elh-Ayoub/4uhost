@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import {BrowserRouter, Routes, Route, useLocation} from "react-router-dom"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "./Css/responsive.css"
+import "./Css/style.css"
+import Header from "./Components/HeaderComponent"
+import Loader from "./Components/LoaderComponent"
+import Home from "./Views/Home"
+import Footer from "./Components/FooterComponent"
+import Login from "./Views/Login"
 
 function App() {
+  let [location, setLocation] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App main-layout">
+      <BrowserRouter>
+      {location && <Header/>}
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/auth/login" element={<Login setLocation={setLocation}/>} />
+        </Routes>
+      {location && <Footer/>}
+      </BrowserRouter>
     </div>
   );
 }
