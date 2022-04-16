@@ -27,7 +27,7 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed|min:8',
         ]);
         if($validator->fails()){
-            return ($validator->errors()->toArray());
+            return response(['status' => "fail-arr", 'message' => $validator->errors()->toArray()], 400);
         }
         if($request->referral_code){
             $referral = User::where('referral_code', $request->referral_code)->first();
@@ -49,9 +49,9 @@ class AuthController extends Controller
 
         if($user){
             // event(new Registered($user));
-            return response(['status' => "success"], Response::HTTP_OK);
+            return response(['status' => "success", "message" => "Registration successfully!"], Response::HTTP_OK);
         }
-        return response(['status' => 'fail'], Response::HTTP_EXPECTATION_FAILED);
+        return response(['status' => 'fail', "message" => "Something went wrong! Try again."], Response::HTTP_EXPECTATION_FAILED);
     }
 
     public function login(Request $request){
