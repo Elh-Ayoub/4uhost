@@ -60,7 +60,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
         if($validator->fails()){
-            return ($validator->errors()->toArray());
+            return response(["status" => "fail-arr", "message" => $validator->errors()->toArray()], 400);
         }
         $credentials = null;
         if(filter_var($request->identifier, FILTER_VALIDATE_EMAIL)) {
@@ -77,7 +77,7 @@ class AuthController extends Controller
         $token = $user->createToken('Auth-T')->plainTextToken;
         $cookie = cookie('jwt', $token, 60*24);
         
-        return response(['status' => 'success'], 200)->withCookie($cookie); 
+        return response(['status' => 'success', 'message' => "logged in successfully!"])->withCookie($cookie); 
     }
 
     public function user(){
