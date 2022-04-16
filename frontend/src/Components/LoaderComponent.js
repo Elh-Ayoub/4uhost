@@ -1,11 +1,8 @@
-import loading from "../images/loading.gif"
+import React from 'react';
+import '../Css/loader.css';
+
 function Loader(){
-    // document.querySelector(".loader_bg").className = "d_none"
-    return(
-        <div className="loader_bg">
-            <div className="loader"><img src={loading} alt="#"/></div>
-        </div>
-    )
+    return <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
 }
 
 export default Loader

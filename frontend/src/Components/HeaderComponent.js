@@ -20,7 +20,7 @@ function Header(){
                   </div>
                </div>
                <div className="col-md-8 col-sm-12">
-                  <nav className="navigation navbar navbar-expand-md navbar-dark">
+                  <nav className="navigation navbar navbar-expand-md navbar-dark" style={{boxShadow: "none"}}>
                      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>
                      </button>
@@ -48,7 +48,7 @@ function Header(){
                <div className="col-md-2  d_none">
                   <ul className="email text_align_right">
                      <li>
-                        <a href="Javascript:void(0)">
+                        <a href="">
                             <FontAwesomeIcon icon={faShoppingCart}/>
                             <span className="badge badge-warning" id='lblCartCount'>0</span>
                         </a>

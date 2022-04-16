@@ -8,6 +8,7 @@ import Loader from "./Components/LoaderComponent"
 import Home from "./Views/Home"
 import Footer from "./Components/FooterComponent"
 import Login from "./Views/Login"
+import Register from "./Views/Register"
 
 function App() {
   let [location, setLocation] = useState(true);
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/auth/login" element={<Login setLocation={setLocation}/>} />
+          <Route path="/auth/register" element={<Register setLocation={setLocation}/>} />
         </Routes>
       {location && <Footer/>}
       </BrowserRouter>

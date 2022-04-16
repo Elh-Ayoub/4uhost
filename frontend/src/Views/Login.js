@@ -3,6 +3,8 @@ import login_img from "../images/login.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import "../Css/login.css"
+import { Link } from "react-router-dom";
+
 function Login(props){
     props.setLocation(false)
     document.title = "Login - 4uhost"
@@ -67,9 +69,9 @@ function Login(props){
                             <br/>
                             <br/>
                             <a href="#!" className="small fw-bold mt-2 pt-1 mb-0" style={{color: "black"}}>Forgot password?</a>
-                            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="register.php"
-                                className="link-danger">Register</a></p>
-                                
+                            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? 
+                                <Link to="/auth/register" className="link-danger">Register</Link>
+                            </p>
                         </div>
                     </form>
                 </div>
