@@ -6,11 +6,11 @@ class Auth {
     }
 
     login(data){
-        return http.post("/auth/login", data)
+        return http.post("/auth/login", data, { withCredentials: true })
     }
 
     user(){
-        return http.get("/auth/user")
+        return http.get("/auth/user", { withCredentials: true })
     }
 }
 

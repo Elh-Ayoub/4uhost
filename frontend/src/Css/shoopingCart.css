@@ -18,3 +18,13 @@
       vertical-align: top;
       margin-left: -5px; 
   }
+.profile_picture{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.username{
+  color: white;
+  text-transform: none;
+  margin-left: 5px;
+}

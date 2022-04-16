@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import "../Css/shoopingCart.css"
+import AuthDataServices from "../services/Auth"
 
 function Header(){
+
+   const [user, setUser] = useState(null)
+   useEffect(() => {
+      AuthDataServices.user()
+      .then(response => {
+         setUser(response.data)
+      })
+   }, [])
+
     return (
         <div className="header">
          <div className="container">
@@ -19,7 +29,7 @@ function Header(){
                      </div>
                   </div>
                </div>
-               <div className="col-md-8 col-sm-12">
+               <div className="col-md-7 col-sm-12">
                   <nav className="navigation navbar navbar-expand-md navbar-dark" style={{boxShadow: "none"}}>
                      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>
@@ -45,15 +55,24 @@ function Header(){
                      </div>
                   </nav>
                </div>
-               <div className="col-md-2  d_none">
-                  <ul className="email text_align_right">
+               <div className="col-md-3 d_none">
+                  <ul className="email d_flex align-items-center">
                      <li>
                         <a href="">
                             <FontAwesomeIcon icon={faShoppingCart}/>
                             <span className="badge badge-warning" id='lblCartCount'>0</span>
                         </a>
                      </li>
-                     <li><Link to="/auth/login">Sign In</Link></li>
+                     <li>
+                        {(user) ? (
+                           <Link to="/auth/login" className="d_flex align-items-center">
+                              <img className="profile_picture" src={user.profile_picture}/>
+                              <span className="username ml-2">{user.username}</span>
+                           </Link>
+                        ):(
+                           <Link to="/auth/login">Sign In</Link>
+                        )}
+                     </li>
                   </ul>
                </div>
             </div>
