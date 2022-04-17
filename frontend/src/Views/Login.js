@@ -127,7 +127,7 @@ function Login(props){
                             style={{paddingLeft: "2.5rem", paddingRight: "2.5rem"}} name="login"/>
                             <br/>
                             <br/>
-                            <a href="#!" className="small fw-bold mt-2 pt-1 mb-0" style={{color: "black"}}>Forgot password?</a>
+                            <Link to="/auth/forget-password" className="small fw-bold mt-2 pt-1 mb-0" style={{color: "black"}}>Forgot password?</Link>
                             <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? 
                                 <Link to="/auth/register" className="link-danger">Register</Link>
                             </p>

@@ -13,6 +13,10 @@ class Auth {
         return http.post("/auth/logout", null, { withCredentials: true })
     }
 
+    forgotPassword(data){
+        return http.post("/auth/forgot-password", data)
+    }
+
     user(){
         return http.get("/auth/user", { withCredentials: true })
     }
