@@ -87,7 +87,7 @@ function Header(props){
                      </li>
                      {(props.user) ? (
                         <li>
-                           <Link to="/auth/login" className="d_flex align-items-center">
+                           <Link to="/users/profile" className="d_flex align-items-center">
                               <img className="profile_picture" src={props.user.profile_picture}/>
                               <span className="username ml-2">{props.user.username}</span>
                            </Link>

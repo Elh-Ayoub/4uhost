@@ -11,6 +11,7 @@ import Login from "./Views/Login"
 import Register from "./Views/Register"
 import AuthDataServices from "./services/Auth"
 import ForgetPassword from "./Views/ForgetPassword"
+import Profile from "./Views/Profile"
 
 function App() {
   const [layout, setLayout] = useState(true)
@@ -30,6 +31,7 @@ function App() {
           <Route path="/auth/login" element={<Login user={user} setLayout={setLayout}/>} />
           <Route path="/auth/register" element={<Register setLayout={setLayout}/>} />
           <Route path="/auth/forget-password" element={<ForgetPassword setLayout={setLayout}/>} />
+          <Route path="/users/profile" element={<Profile setLayout={setLayout}/>} />
         </Routes>
       {layout && <Footer/>}
       </BrowserRouter>
