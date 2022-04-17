@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Register(props){
-    props.setLocation(false)
+    props.setLayout(false)
     document.title = "Register - 4uhost"
 
     const [username, setUsername] = useState(null)

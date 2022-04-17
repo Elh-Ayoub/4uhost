@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import {BrowserRouter, Routes, Route, useLocation} from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import {BrowserRouter, Routes, Route, uselayout} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./Css/responsive.css"
 import "./Css/style.css"
@@ -9,19 +9,27 @@ import Home from "./Views/Home"
 import Footer from "./Components/FooterComponent"
 import Login from "./Views/Login"
 import Register from "./Views/Register"
+import AuthDataServices from "./services/Auth"
 
 function App() {
-  let [location, setLocation] = useState(true);
+  const [layout, setLayout] = useState(true)
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    AuthDataServices.user()
+    .then(response => {
+       setUser(response.data)
+    })
+ }, [window.location.pathname])
   return (
     <div className="App main-layout">
       <BrowserRouter>
-      {location && <Header/>}
+      {layout && <Header user={user} setUser={setUser}/>}
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/auth/login" element={<Login setLocation={setLocation}/>} />
-          <Route path="/auth/register" element={<Register setLocation={setLocation}/>} />
+          <Route path="/auth/login" element={<Login user={user} setLayout={setLayout}/>} />
+          <Route path="/auth/register" element={<Register setLayout={setLayout}/>} />
         </Routes>
-      {location && <Footer/>}
+      {layout && <Footer/>}
       </BrowserRouter>
     </div>
   );

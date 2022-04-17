@@ -28,3 +28,10 @@
   text-transform: none;
   margin-left: 5px;
 }
+
+.btn_logout{
+  text-transform: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+

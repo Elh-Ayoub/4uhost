@@ -3,16 +3,16 @@ import login_img from "../images/login.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import "../Css/login.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthDataServices from "../services/Auth"
 import Loader from "../Components/LoaderComponent"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Login(props){
-    props.setLocation(false)
+    props.setLayout(false)
     document.title = "Login - 4uhost"
-
+    const navigate = useNavigate()
     const [identifier, setIdentifier] = useState(null)
     const [password, setPassword] = useState(null)
     const [status, setStatus] = useState({loading: false, data: null, error: null})
@@ -29,6 +29,7 @@ function Login(props){
                   data: response.data,
                   error: null
                 })
+                
             }).catch(error => {
                 setStatus({
                   loading: false,
@@ -36,26 +37,26 @@ function Login(props){
                   error: error.response.data
                 })                
             })
-
-            if(status.data){
-                if(status.data.status == "success"){
-                    toast(status.data.message, {type: toast.TYPE.SUCCESS}) 
-                }
-            }
-            if(status.error){
-                if(status.error.status == "fail"){
-                    toast(status.error.message, {type: toast.TYPE.ERROR})
-                }else{
-                    for (const [key, value] of Object.entries(status.error.message)) {
-                        toast(value[0], {type: toast.TYPE.ERROR})
-                    }
-                }
-            }
         }else{
             toast("All fields are required!", {type: toast.TYPE.ERROR})
         } 
     }
-    
+    if(status.data){
+        if(status.data.status == "success"){
+            toast(status.data.message, {type: toast.TYPE.SUCCESS}) 
+        }
+        props.setLayout(true)
+        navigate("/")
+    }
+    if(status.error){
+        if(status.error.status == "fail"){
+            toast(status.error.message, {type: toast.TYPE.ERROR})
+        }else{
+            for (const [key, value] of Object.entries(status.error.message)) {
+                toast(value[0], {type: toast.TYPE.ERROR})
+            }
+        }
+    }
     let loader
     if(status.loading){
       loader = <div className='loader'><Loader/></div>
