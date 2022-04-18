@@ -12,6 +12,7 @@ import Register from "./Views/Register"
 import AuthDataServices from "./services/Auth"
 import ForgetPassword from "./Views/ForgetPassword"
 import Profile from "./Views/Profile"
+import About from "./Views/About"
 
 function App() {
   const [layout, setLayout] = useState(true)
@@ -32,6 +33,7 @@ function App() {
           <Route path="/auth/register" element={<Register setLayout={setLayout}/>} />
           <Route path="/auth/forget-password" element={<ForgetPassword setLayout={setLayout}/>} />
           <Route path="/users/profile" element={<Profile setLayout={setLayout}/>} />
+          <Route path="/about" element={<About/>}/>
         </Routes>
       {layout && <Footer/>}
       </BrowserRouter>

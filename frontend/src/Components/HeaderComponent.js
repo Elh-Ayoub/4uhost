@@ -59,10 +59,10 @@ function Header(props){
                      <div className="collapse navbar-collapse" id="navbarsExample04">
                         <ul className="navbar-nav mr-auto">
                            <li className="nav-item active">
-                              <a className="nav-link p-3" href="">Home</a>
+                              <Link to="/" className="nav-link p-3">Home</Link>
                            </li>
                            <li className="nav-item">
-                              <a className="nav-link p-3" href="">About</a>
+                              <Link to="/about" className="nav-link p-3">About</Link>
                            </li>
                            <li className="nav-item">
                               <a className="nav-link p-3" href="">Hosting</a>
