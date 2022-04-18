@@ -35,6 +35,7 @@ Route::get("/users", [UserController::class, 'index']);
 Route::get("/users/{id}", [UserController::class, 'show']);
 Route::patch("/users/{id}", [UserController::class, 'update'])->middleware('auth:sanctum');
 Route::patch("/users/{id}/password", [UserController::class, 'updatePassword'])->middleware('auth:sanctum');
+Route::post("/users/{id}/avatar", [UserController::class, 'setAvatar'])->middleware('auth:sanctum');
 Route::delete("/users/{id}/avatar", [UserController::class, 'setDefaultAvatar'])->middleware('auth:sanctum');
 Route::delete("/users/{id}", [UserController::class, 'destroy'])->middleware('auth:sanctum');
 //wallet

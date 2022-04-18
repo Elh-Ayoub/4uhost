@@ -36,10 +36,10 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
-        if(!$user) return response(['status' => 'fail', 'message' => 'User not found!'], 400);
+        if(!$user) return response(['status' => 'fail', 'message' => 'User not found!'], 404);
 
         if($validator->fails()){
-            return response(['status' => 'fail', 'message' => $validator->errors()->toArray()], 400);
+            return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
         }
         $user->update([
             'username' => ($request->username) ? ($request->username) : ($user->username),
@@ -48,6 +48,20 @@ class UserController extends Controller
             'role_id' => ($request->role_id) ? ($request->role_id) : ($user->role_id),
         ]);
         return response(['status' => 'success', 'message' => 'User updated!']);
+    }
+
+    public function setAvatar(Request $request, $id){
+        $user = User::find($id);
+        if(!$user) return response(['status' => 'fail', 'message' => 'User not found!'], 404);
+
+        if($request->file('profile_picture')){
+            $user->update([
+                'profile_picture' => $this->uploadImage($request, $user),
+            ]);
+            return response(['status' => 'success', 'message' => 'Profile picture updated!']);
+        }else{
+            return response(['status' => 'fail', 'message' => 'An image file is required!'], 400);
+        }
     }
 
     function uploadImage($request, $user = null){
@@ -59,6 +73,7 @@ class UserController extends Controller
             $request->file('profile_picture')->move(public_path('storage/profile-pictures'), $filename);
             return asset('storage/profile-pictures/'.$filename);
         }
+        return null;
     }
 
     public function updatePassword(Request $request, $id){
@@ -113,6 +128,10 @@ class UserController extends Controller
     public function fillWallet(Request $request, $id){
         $validator = Validator::make($request->all(), [
             'amount' => 'required|numeric',
+            'card_number' => 'required|numeric',
+            'exp_month' => 'required|numeric',
+            'exp_year' => 'required|numeric',
+            'cvc' => 'required|numeric',
         ]);
         if($validator->fails()){
             return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
@@ -124,12 +143,25 @@ class UserController extends Controller
         if($request->amount < 100){
             return response(['status' => 'fail', 'message' => "Minimum amount is 100 rs"], 400);
         }
-
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        try {
+            $response = $stripe->tokens->create([
+                'card' => [
+                'number' => $request->card_number,
+                'exp_month' => $request->exp_month,
+                'exp_year' => $request->exp_year,
+                'cvc' => $request->cvc,
+                ],
+            ]);
+        } catch (\Throwable $th) {
+            return response(['status' => 'fail', 'message' => "Card not valid!"], 400);
+        }
+        
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $payment = Stripe\Charge::create ([
                 "amount" => $request->amount * 100,
                 "currency" => "INR",
-                "source" => $request->stripeToken,
+                "source" => $response['id'],
                 "description" => "Charging wallet: #" . $user->id . ", username: " . $user->username,
         ]);
         if($payment){
