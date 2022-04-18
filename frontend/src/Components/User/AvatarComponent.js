@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserDataService from "../../services/User"
 import Loader from "../LoaderComponent";
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,10 +7,22 @@ import 'react-toastify/dist/ReactToastify.css';
 function AvatarCard(props){
     const [selectedFile, setSelectedFile] = useState(null)
     const [status, setStatus] = useState({loading: false, data: null, error: null})
+    const [role, setRole] = useState({loading: false, data: null, error: null})
     const changeHandler = (event) => {
 		setSelectedFile(event.target.files[0]);
         document.getElementById('profile-pic').src = URL.createObjectURL(event.target.files[0]);
 	};
+
+    useEffect(() => {
+        setRole({loading: true, data: null, error: null})
+        UserDataService.getRole(props.user.role_id)
+        .then(response => {
+            setRole({loading: false, data: response.data, error: null})
+        })
+        .catch(error => {
+            setRole({loading: false, data: null, error: error.response.data})
+        })
+    }, [])
 
     const updateAvatar = async () => {
         if(!selectedFile){
@@ -73,7 +85,7 @@ function AvatarCard(props){
                     <ul className="mb-3">
                         <hr/>
                         <li className="d-flex col-md-11 justify-content-between mx-auto">
-                            <b>Role</b> <a>{props.user.role_id}</a>
+                            <b>Role</b> <a>{(role.data) ? (role.data.title) : ((role.loading) ? ("loading...") : (null))}</a>
                         </li>
                         <hr/>
                         <li className="d-flex col-md-11 justify-content-between mx-auto">

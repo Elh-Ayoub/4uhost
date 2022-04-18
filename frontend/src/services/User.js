@@ -18,6 +18,10 @@ class User {
         return http.delete(`/users/${id}/avatar`, { withCredentials: true })
     }
 
+    getRole(role_id){
+        return http.get(`/roles/${role_id}`)
+    }
+
     fillWallet(id, data){
         return http.post(`/users/${id}/fill-wallet`, data, { withCredentials: true })
     }

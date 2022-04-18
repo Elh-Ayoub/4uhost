@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserDataService from "../../services/User";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Loader from "../LoaderComponent"
 import Modal from 'react-bootstrap/Modal'
+import PaymentDataService from "../../services/Payment"
 
 function Wallet(props){
-    const [paymentSettings, setPaymentSettings] = useState(null)
+    const [paymentSettings, setPaymentSettings] = useState({loading: false, data:null, error: null})
     const [status, setStatus] = useState({loading: false, data:null, error: null});
     const [show, setShow] = useState(false);
     const [amount, setAmount] = useState(100);
@@ -19,6 +20,20 @@ function Wallet(props){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    useEffect(() => {
+        PaymentDataService.getSettings()
+        .then(response => {
+            setPaymentSettings({loading: false, data: response.data, error: null})
+        }).catch(error => {
+            setPaymentSettings({loading: false, data: null, error: error.response.data})
+        })
+    }, [])
+    let valueOfRefPoints
+    if(paymentSettings.data){
+        var vorpObject = paymentSettings.data.find(x => x.title == "value_of_referral_points")
+        valueOfRefPoints = vorpObject.value
+        console.log(valueOfRefPoints);
+    }
     const submitPayment = async () => {
         setStatus({loading: true, data:null, error: null})
         setDisbleBtn(true)
@@ -75,7 +90,8 @@ function Wallet(props){
             <div className="form-group row mb-1">
                 <label className="col-sm-4 col-form-label">Referral balence</label>
                 <div className="col-sm-8">
-                    <p className="form-control">...</p>
+                    <p className="form-control">{(valueOfRefPoints) ? (props.user.referral_points * valueOfRefPoints ) : 
+                    ((paymentSettings.loading) ? ("loading...") : (null))}</p>
                 </div>
             </div>
             <button className="btn btn-primary mt-2 float-end" onClick={handleShow}>Add wallet balance</button>
