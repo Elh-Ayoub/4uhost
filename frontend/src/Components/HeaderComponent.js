@@ -65,10 +65,10 @@ function Header(props){
                               <Link to="/about" className="nav-link p-3">About</Link>
                            </li>
                            <li className="nav-item">
-                              <a className="nav-link p-3" href="">Hosting</a>
+                              <Link to="/hosting-plans" className="nav-link p-3">Hosting</Link>
                            </li>
                            <li className="nav-item">
-                              <a className="nav-link p-3" href="">Domain</a>
+                              <Link to="/domain" className="nav-link p-3">Domain</Link>
                            </li>
                            <li className="nav-item">
                               <a className="nav-link p-3" href="">Contact Us</a>

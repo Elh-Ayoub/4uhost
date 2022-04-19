@@ -13,6 +13,8 @@ import AuthDataServices from "./services/Auth"
 import ForgetPassword from "./Views/ForgetPassword"
 import Profile from "./Views/Profile"
 import About from "./Views/About"
+import HostingPlans from "./Views/HostingPlans"
+import Domain from "./Views/Domain"
 
 function App() {
   const [layout, setLayout] = useState(true)
@@ -34,6 +36,8 @@ function App() {
           <Route path="/auth/forget-password" element={<ForgetPassword setLayout={setLayout}/>} />
           <Route path="/users/profile" element={<Profile setLayout={setLayout}/>} />
           <Route path="/about" element={<About/>}/>
+          <Route path="/hosting-plans" element={<HostingPlans/>}/>
+          <Route path="/domain" element={<Domain/>}/>
         </Routes>
       {layout && <Footer/>}
       </BrowserRouter>
