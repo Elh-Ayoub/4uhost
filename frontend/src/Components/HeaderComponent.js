@@ -8,11 +8,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "./LoaderComponent";
 import AuthDataServices from "../services/Auth"
+import Modal from 'react-bootstrap/Modal'
+import PlanById from "./PlanComponent";
 
 function Header(props){
    const [status, setStatus] = useState({loading: false, data: null, error: null})
+   const [showCart, setShowCart] = useState(false);
    const navigate = useNavigate()
-
+   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("shoppingCart")));
+   const handleClose = () => setShowCart(false);
+   const handleShow = () => setShowCart(true);
+   
    async function logout(){
       setStatus({loading: true, data: null, error: null})
       await AuthDataServices.logout()
@@ -37,6 +43,18 @@ function Header(props){
       loader = <div className="position-absolute top-left"><Loader/></div>
    }
 
+   //Cart
+   useEffect(() => {
+      setCart(JSON.parse(localStorage.getItem("shoppingCart")))
+   }, [cart, props.cart])
+
+   let cartElement = <p>Empty..</p>
+   if(cart.length > 0){
+      cartElement = props.cart.map((id) =>
+         <PlanById id={id} key={id} removeFromCard={props.removeFromCard}/>
+      )
+   }
+   
     return (
         <div className="header">
          <div className="container">
@@ -80,9 +98,9 @@ function Header(props){
                <div className="col-md-4 d_none">
                   <ul className="email d_flex align-items-center justify-content-end">
                      <li>
-                        <a href="">
+                        <a onClick={handleShow} style={{color: "white", cursor: "pointer"}}>
                             <FontAwesomeIcon icon={faShoppingCart}/>
-                            <span className="badge badge-warning" id='lblCartCount'>0</span>
+                            <span className="badge badge-warning" id='lblCartCount'>{cart.length}</span>
                         </a>
                      </li>
                      {(props.user) ? (
@@ -108,9 +126,45 @@ function Header(props){
                </div>
             </div>
          </div>
+         <div>
+            <Modal show={showCart} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                     <Modal.Title><FontAwesomeIcon icon={faShoppingCart}/> Cart</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th scope="col" class="border-0 bg-light">
+                                 <div class="p-2 px-3 text-uppercase">Plan</div>
+                              </th>
+                              <th scope="col" class="border-0 bg-light">
+                                 <div class="py-2 text-uppercase">Price</div>
+                              </th>
+                              <th scope="col" class="border-0 bg-light">
+                                 <div class="py-2 text-uppercase">Quantity</div>
+                              </th>
+                              <th scope="col" class="border-0 bg-light">
+                                 <div class="py-2 text-uppercase">Remove</div>
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {cartElement}
+                        </tbody>
+                     </table>
+                  </Modal.Body>
+                  <Modal.Footer>
+                     <button className="btn btn-secondary" onClick={handleClose}>
+                           Close
+                     </button>
+                     <button className="btn btn-primary" type="submit">Pay</button>
+                  </Modal.Footer>
+            </Modal>
+         </div>
          <ToastContainer/>
       </div>
-    )
+   )
 }
 
 export default Header

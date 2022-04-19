@@ -21,6 +21,10 @@ class Plan {
     backupPlans(){
         return http.get("/plans/backup")
     }
+
+    getById(id){
+        return http.get(`/plans/${id}`)
+    }
 }
 
 export default new Plan()

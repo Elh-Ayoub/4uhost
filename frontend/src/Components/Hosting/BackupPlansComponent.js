@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PlansDataService from "../../services/Plans"
 import Loader from "../LoaderComponent";
 
-function BackupPlans(){
+function BackupPlans(props){
     const [backupPlans, setBackupPlans] = useState({loading: false, data: null, error: null})
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function BackupPlans(){
                         <li>24/7 support</li>
                     </ul>
                 </div>
-                <a className="read_more" href="">Buy Now</a>
+                <a className="read_more" onClick={() => { props.addToCard(plan.id) }}>Buy Now</a>
                 </div>
             </div>
         )

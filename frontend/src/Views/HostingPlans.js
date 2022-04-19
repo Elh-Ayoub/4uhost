@@ -8,7 +8,7 @@ import WebHostingPlans from "../Components/Hosting/WebHostingComponent";
 import EmailsPlans from "../Components/Hosting/EmailsPlansComponent";
 import BackupPlans from "../Components/Hosting/BackupPlansComponent";
 
-function HostingPlans(){
+function HostingPlans(props){
     return (
         <div className="slider_main" style={{background: "#2E428B"}}>
             <div className="about">
@@ -46,16 +46,16 @@ function HostingPlans(){
                             <Col sm={10}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey="storage-plans">
-                                        <StoragePlans/>
+                                        <StoragePlans cart={props.cart} addToCard={props.addToCard} />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="web-hosting">
-                                        <WebHostingPlans/>
+                                        <WebHostingPlans cart={props.cart} addToCard={props.addToCard}/>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="emails-plans">
-                                        <EmailsPlans/>
+                                        <EmailsPlans cart={props.cart} addToCard={props.addToCard}/>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="backup-plans">
-                                        <BackupPlans/>
+                                        <BackupPlans cart={props.cart} addToCard={props.addToCard}/>
                                     </Tab.Pane>
                                 </Tab.Content>
                             </Col>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PlansDataService from "../../services/Plans"
 import Loader from "../LoaderComponent";
 
-function EmailsPlans(){
+function EmailsPlans(props){
     const [emailsPlans, setEmailsPlans] = useState({loading: false, data: null, error: null})
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function EmailsPlans(){
                         <li>Personal use</li>
                     </ul>
                 </div>
-                <a className="read_more" href="">Buy Now</a>
+                <a className="read_more" onClick={() => { props.addToCard(plan.id) }}>Buy Now</a>
                 </div>
             </div>
         )
