@@ -56,6 +56,7 @@ Route::get("/plans/web-hosting", [PurchaseController::class, 'getWebhostingPlans
 Route::get("/plans/emails", [PurchaseController::class, 'getEmailPlans']);
 Route::get("/plans/domains", [PurchaseController::class, 'getDomainPlans']);
 Route::get("/plans/backup", [PurchaseController::class, 'getBackupPlans']);
+Route::get("/plans/{id}", [PurchaseController::class, 'show']);
 
 /////////////////////// ----Purchase module---- ///////////////////////
 Route::post('/purchase', [PurchaseController::class, 'store'])->middleware('auth:sanctum');

@@ -76,6 +76,10 @@ class PurchaseController extends Controller
         return response(['status' => 'fail', 'message' => 'Something went wromg! Try again.'], 400);
     }
 
+    public function show($id){
+        return Plan::find($id);
+    }
+
     public function getPaymentSettings(){
         return PaymentSettings::all();
     }
