@@ -22,7 +22,7 @@ function WebHostingPlans(props){
 
     if(webHostingPlans.data){
         content = webHostingPlans.data.map((plan) => 
-            <div className="col-md-4">
+            <div key={plan.id} className="col-md-4">
                 <div id="ho_co" className="order-box_main">
                 <div className="order-box text_align_center">
                     <h3>Web hosting plan</h3>

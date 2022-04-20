@@ -25,7 +25,7 @@ function Footer(){
                         <ul className="conta">
                            <li><FontAwesomeIcon icon={faMapMarked}/> Address : Loram Ipusm</li>
                            <li><FontAwesomeIcon icon={faPhone}/> Call : +01 1234567890</li>
-                           <li><FontAwesomeIcon icon={faEnvelope}/><a href="Javascript:void(0)"> Email : demo@gmail.com</a></li>
+                           <li><FontAwesomeIcon icon={faEnvelope}/><a href=""> Email : demo@gmail.com</a></li>
                         </ul>
                      </div>
                   </div>

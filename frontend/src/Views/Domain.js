@@ -21,63 +21,63 @@ function Domain(){
     }
     if(domainPlan.data){
         content = <div className="slider_main" style={{background: "#2E428B"}}>
-            <div class="domain">
-                <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="titlepage text_align_center">
-                            <h2>all starts with  <span class="blue_light">a domain</span></h2>
+            <div className="domain">
+                <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="titlepage text_align_center">
+                            <h2>all starts with  <span className="blue_light">a domain</span></h2>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="form">
-                            <div class="searchbar">
-                            <input class="search_input" type="text" placeholder="Search Domain" onChange={(e) => {setDomainName(e.target.value)}}/>
-                            <a href="#" class="search_icon"><i class="fa fa-search" aria-hidden="true"></i>
+                <div className="row">
+                    <div className="col-md-10 offset-md-1">
+                        <div className="form">
+                            <div className="searchbar">
+                            <input className="search_input" type="text" placeholder="Search Domain" onChange={(e) => {setDomainName(e.target.value)}}/>
+                            <a href="#" className="search_icon"><i className="fa fa-search" aria-hidden="true"></i>
                             </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-10 offset-md-1">
-                        <div class="domain_bg">
-                            <div class="row">
-                            <div class="col-sm-2">
-                                <div class="domain-price">
+                    <div className="col-md-10 offset-md-1">
+                        <div className="domain_bg">
+                            <div className="row">
+                            <div className="col-sm-2">
+                                <div className="domain-price">
                                     <strong>{(domainName) ? (domainName) : ("Domain")} <br/> Per Year</strong>
                                 </div>
                             </div>
-                            <div class="col-sm-10">
-                                <div class="domain-price_main ">
-                                    <div class="domain-price">
+                            <div className="col-sm-10">
+                                <div className="domain-price_main ">
+                                    <div className="domain-price">
                                         <span>com.</span>
                                         <strong>{domainPlan.data[0].price + " rs"}</strong>
                                     </div>
-                                    <div class="domain-price">
+                                    <div className="domain-price">
                                         <span>org.</span>
                                         <strong>{domainPlan.data[0].price + " rs"}</strong>
                                     </div>
-                                    <div class="domain-price">
+                                    <div className="domain-price">
                                         <span>net.</span>
                                         <strong>{domainPlan.data[0].price + " rs"}</strong>
                                     </div>
-                                    <div class="domain-price">
+                                    <div className="domain-price">
                                         <span>io.</span>
                                         <strong>{domainPlan.data[0].price + " rs"}</strong>
                                     </div>
-                                    <div class="domain-price">
+                                    <div className="domain-price">
                                         <span>tech.</span>
                                         <strong>{domainPlan.data[0].price + " rs"}</strong>
                                     </div>
-                                    <div class="domain-price">
+                                    <div className="domain-price">
                                         <span>me.</span>
                                         <strong>{domainPlan.data[0].price + " rs"}</strong>
                                     </div>
                                 </div>
                             </div>
                             </div>
-                            <button class="read_more" id="add_to_cart" href="domain.html" onClick={() => {alert("active")}} disabled={(domainName) ? (false) : (true)}>Add to cart</button>
+                            <button className="read_more" id="add_to_cart" href="domain.html" onClick={() => {alert("active")}} disabled={(domainName) ? (false) : (true)}>Add to cart</button>
                         </div>
                     </div>
                 </div>

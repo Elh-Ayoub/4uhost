@@ -19,25 +19,25 @@ function HostingPlans(props){
                                 <Nav variant="pills" className="flex-column">
                                     <Nav.Item style={{cursor: "pointer"}}>
                                         <Nav.Link eventKey="storage-plans">
-                                            <i class="fas fa-box-open nav-icon mx-2"></i>
+                                            <i className="fas fa-box-open nav-icon mx-2"></i>
                                             Storage plans
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item style={{cursor: "pointer"}}>
                                         <Nav.Link eventKey="web-hosting">
-                                            <i class="fas fa-server nav-icon mx-2"></i>
+                                            <i className="fas fa-server nav-icon mx-2"></i>
                                             Web hosting plans
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item style={{cursor: "pointer"}}>
                                         <Nav.Link eventKey="emails-plans">
-                                            <i class="fas fa-at nav-icon mx-2"></i>
+                                            <i className="fas fa-at nav-icon mx-2"></i>
                                             Emails plans
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item style={{cursor: "pointer"}}>
                                         <Nav.Link eventKey="backup-plans">
-                                            <i class="fas fa-undo nav-icon mx-2"></i>
+                                            <i className="fas fa-undo nav-icon mx-2"></i>
                                             Backup plans
                                         </Nav.Link>
                                     </Nav.Item>

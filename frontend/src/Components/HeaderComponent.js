@@ -10,6 +10,7 @@ import Loader from "./LoaderComponent";
 import AuthDataServices from "../services/Auth"
 import Modal from 'react-bootstrap/Modal'
 import PlanById from "./PlanComponent";
+import Cart from "./CartComponent";
 
 function Header(props){
    const [status, setStatus] = useState({loading: false, data: null, error: null})
@@ -127,40 +128,7 @@ function Header(props){
             </div>
          </div>
          <div>
-            <Modal show={showCart} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                     <Modal.Title><FontAwesomeIcon icon={faShoppingCart}/> Cart</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                     <table class="table">
-                        <thead>
-                           <tr>
-                              <th scope="col" class="border-0 bg-light">
-                                 <div class="p-2 px-3 text-uppercase">Plan</div>
-                              </th>
-                              <th scope="col" class="border-0 bg-light">
-                                 <div class="py-2 text-uppercase">Price</div>
-                              </th>
-                              <th scope="col" class="border-0 bg-light">
-                                 <div class="py-2 text-uppercase">Quantity</div>
-                              </th>
-                              <th scope="col" class="border-0 bg-light">
-                                 <div class="py-2 text-uppercase">Remove</div>
-                              </th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           {cartElement}
-                        </tbody>
-                     </table>
-                  </Modal.Body>
-                  <Modal.Footer>
-                     <button className="btn btn-secondary" onClick={handleClose}>
-                           Close
-                     </button>
-                     <button className="btn btn-primary" type="submit">Pay</button>
-                  </Modal.Footer>
-            </Modal>
+            <Cart showCart={showCart} user={props.user} handleClose={handleClose} removeFromCard={props.removeFromCard}/>
          </div>
          <ToastContainer/>
       </div>

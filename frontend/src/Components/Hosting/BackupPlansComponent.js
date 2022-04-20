@@ -22,7 +22,7 @@ function BackupPlans(props){
 
     if(backupPlans.data){
         content = backupPlans.data.map((plan) => 
-            <div className="col-md-4">
+            <div key={plan.id} className="col-md-4">
                 <div id="ho_co" className="order-box_main">
                 <div className="order-box text_align_center">
                     <h3>Backup plan</h3>

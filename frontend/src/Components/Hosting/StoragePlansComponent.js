@@ -23,7 +23,7 @@ function StoragePlans(props){
 
     if(storagePlans.data){
         content = storagePlans.data.map((plan) => 
-            <div className="col-md-4">
+            <div key={plan.id} className="col-md-4">
                 <div id="ho_co" className="order-box_main">
                 <div className="order-box text_align_center">
                     <h3>Storage plan</h3>
