@@ -80,6 +80,30 @@ class PurchaseController extends Controller
         return Plan::find($id);
     }
 
+    public function getFullPrice(Request $request){
+        $validator = Validator::make($request->all(), [
+            "plans_ids"    => "required|array|min:1",
+            "plans_ids.*"  => "required|numeric",
+        ]);
+
+        if($validator->fails()){
+            return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
+        }
+        $full_price = 0;
+        foreach($request->plans_ids as $plan_id){
+            $plan = Plan::find($plan_id);
+            if($plan){
+                $full_price += $plan->price;
+            }else{
+                return response(['status' => 'fail', 'message' => 'Some plan not found! Please try again.'], 404);
+            }
+        }
+        $tax_percentage = PaymentSettings::where('title', 'percentage_tax_in_billing')->first()->value;
+        $full_price += ($full_price * $tax_percentage) / 100;
+
+        return response(['status' => 'success', 'message' => $full_price]);
+    }
+
     public function getPaymentSettings(){
         return PaymentSettings::all();
     }

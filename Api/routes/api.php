@@ -60,6 +60,7 @@ Route::get("/plans/{id}", [PurchaseController::class, 'show']);
 
 /////////////////////// ----Purchase module---- ///////////////////////
 Route::post('/purchase', [PurchaseController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/purchase/full-price', [PurchaseController::class, 'getFullPrice']);
 
 /////////////////////// ---- Contact us ---- ///////////////////////
 Route::post("/contact-us", [UserController::class, 'contactUs']);
