@@ -25,6 +25,10 @@ class User {
     fillWallet(id, data){
         return http.post(`/users/${id}/fill-wallet`, data, { withCredentials: true })
     }
+
+    contactUs(data){
+        return http.post("/contact-us", data)
+    }
 }
 
 export default new User()

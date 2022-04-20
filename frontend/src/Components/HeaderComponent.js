@@ -90,7 +90,7 @@ function Header(props){
                               <Link to="/domain" className="nav-link p-3">Domain</Link>
                            </li>
                            <li className="nav-item">
-                              <a className="nav-link p-3" href="">Contact Us</a>
+                              <Link to="/contact-us" className="nav-link p-3">Contact Us</Link>
                            </li>
                         </ul>
                      </div>
