@@ -22,10 +22,17 @@ class PurchaseController extends Controller
             return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
         }
         $full_price = 0;
+        $domain_name = null;
         foreach($request->plans_ids as $plan_id){
             $plan = Plan::find($plan_id);
             if($plan){
                 $full_price += $plan->price;
+                if($plan->name === "Domains"){
+                    if(!$request->domain_name){
+                        return response(['status' => 'fail', 'message' => 'Domain name not specified!'], 404);
+                    }
+                    $domain_name = $request->domain_name;
+                }
             }else{
                 return response(['status' => 'fail', 'message' => 'Some plan not found! Please try again.'], 404);
             }
@@ -69,6 +76,7 @@ class PurchaseController extends Controller
             'user_id' => Auth::id(),
             'plans_ids' => implode(', ', $request->plans_ids),
             'full_price' => $full_price,
+            'domain_name' => $domain_name,
         ]);
         if($purchase){
             return response(['status' => 'success', 'message' => 'Purchase made successfully!']);
@@ -78,6 +86,21 @@ class PurchaseController extends Controller
 
     public function show($id){
         return Plan::find($id);
+    }
+
+    public function getUserPurchases(){
+        $purchases = Purchase::where("user_id", Auth::id())->get();
+        $res = array();
+        foreach($purchases as $purchase){
+            foreach(explode(", ", $purchase->plans_ids) as $id){
+                $plan = Plan::find($id);
+                if($plan->name == "Domains"){
+                    $plan->domain_name = $purchase->domain_name;
+                }
+                array_push($res, $plan);
+            }
+        }
+        return response(['status' => 'success', 'message' => $res]);
     }
 
     public function getFullPrice(Request $request){

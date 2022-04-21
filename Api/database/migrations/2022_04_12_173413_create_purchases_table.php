@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->text('plans_ids');
             $table->double('full_price');
+            $table->string('domain_name')->nullable();
             $table->timestamps();
         });
     }

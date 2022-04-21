@@ -13,6 +13,6 @@ class Purchase extends Model
         'user_id',
         'plans_ids',
         'full_price',
-        
+        'domain_name',
     ];
 }
