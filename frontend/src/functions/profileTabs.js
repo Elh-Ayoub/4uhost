@@ -5,6 +5,8 @@ export function infoTab() {
     document.getElementById("password").classList = ["tab-pane"]
     document.getElementById("walletTab").classList = ["nav-link"]
     document.getElementById("wallet").classList = ["tab-pane"]
+    document.getElementById("purchasesTab").classList = ["nav-link"]
+    document.getElementById("purchases").classList = ["tab-pane"]
 }
 export function passwordTab(){
     document.getElementById("infoTab").classList = ["nav-link"]
@@ -13,6 +15,8 @@ export function passwordTab(){
     document.getElementById("password").classList = ["tab-pane active"]
     document.getElementById("walletTab").classList = ["nav-link"]
     document.getElementById("wallet").classList = ["tab-pane"]
+    document.getElementById("purchasesTab").classList = ["nav-link"]
+    document.getElementById("purchases").classList = ["tab-pane"]
 }
 
 export function walletTab(){
@@ -22,4 +26,17 @@ export function walletTab(){
     document.getElementById("password").classList = ["tab-pane"]
     document.getElementById("walletTab").classList = ["nav-link active"]
     document.getElementById("wallet").classList = ["tab-pane active"]
+    document.getElementById("purchasesTab").classList = ["nav-link"]
+    document.getElementById("purchases").classList = ["tab-pane"]
+}
+
+export function purchasesTab(){
+    document.getElementById("infoTab").classList = ["nav-link"]
+    document.getElementById("settings").classList = ["tab-pane"]
+    document.getElementById("passwordTab").classList = ["nav-link"]
+    document.getElementById("password").classList = ["tab-pane"]
+    document.getElementById("walletTab").classList = ["nav-link"]
+    document.getElementById("wallet").classList = ["tab-pane"]
+    document.getElementById("purchasesTab").classList = ["nav-link active"]
+    document.getElementById("purchases").classList = ["tab-pane active"]
 }

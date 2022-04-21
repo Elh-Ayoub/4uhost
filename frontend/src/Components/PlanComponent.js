@@ -18,18 +18,32 @@ function PlanById(props){
 
     let content = null
     let unity = ""
+    let domainName
     if(plan.loading){
         content = <Loader/>
     }
+
+    const removeCardItems = (id, removeDomainName) => {
+        props.removeFromCard(id)
+        if(removeDomainName){
+            localStorage.removeItem("domainName")
+        }
+    }
+
     if(plan.data){
         if(plan.data.name =="Storage plans") unity = "GB" 
         if(plan.data.name =="Web hosting plans") unity = "website(s)" 
         if(plan.data.name =="Email plans") unity = "email(s)" 
-        if(plan.data.name =="Domains") unity = "domain"
+        if(plan.data.name =="Domains") {
+            unity = "domain" 
+            domainName = localStorage.getItem("domainName")
+        }
 
         content = 
         <tr>
-            <td className="border-0 align-middle"><strong className="plan_price">{plan.data.name}</strong></td>
+            <td className="border-0 align-middle">
+                <strong className="plan_price">{plan.data.name}<span className="small text-center mx-1">{(domainName) ? ("(" + domainName + ")") : (null)}</span></strong>
+            </td>
             <td className="border-0 align-middle"><strong className="plan_price">{plan.data.price + " rs"}</strong></td>
             <td className="border-0 align-middle">
                 <strong>
@@ -37,7 +51,7 @@ function PlanById(props){
                 </strong>
             </td>
             <td className="border-0 align-middle"><strong className="plan_price">{"Per " + plan.data.duration}</strong></td>
-            <td className="border-0 align-middle"><button className="btn btn-outline-danger" onClick={() => {props.removeFromCard(plan.data.id)}}><i className="fa fa-trash"></i></button></td>
+            <td className="border-0 align-middle"><button className="btn btn-outline-danger" onClick={() => {removeCardItems(plan.data.id, domainName)}}><i className="fa fa-trash"></i></button></td>
         </tr>
     }
 

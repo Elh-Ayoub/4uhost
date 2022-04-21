@@ -60,7 +60,7 @@ function App() {
           <Route path="/users/profile" element={<Profile setLayout={setLayout}/>} />
           <Route path="/about" element={<About/>}/>
           <Route path="/hosting-plans" element={<HostingPlans cart={cart} addToCard={addToCard} />}/>
-          <Route path="/domain" element={<Domain/>}/>
+          <Route path="/domain" element={<Domain addToCard={addToCard}/>}/>
           <Route path="/contact-us" element={<Contact/>}/>
         </Routes>
       {layout && <Footer/>}

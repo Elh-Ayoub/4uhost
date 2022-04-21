@@ -69,7 +69,7 @@ function Cart(props){
 
     const makePurchase = async () => {
         setPurchase({loading: true, data: null, error: null})
-        let data = {plans_ids: cart, referral_balance: referral}
+        let data = {plans_ids: cart, referral_balance: referral, domain_name: localStorage.getItem("domainName")}
         PaymentDataService.makePurchase(data)
         .then(response => {
             setPurchase({loading: false, data: response.data, error: null})

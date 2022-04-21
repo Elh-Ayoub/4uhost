@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { infoTab, passwordTab, walletTab } from "../../functions/profileTabs.js";
+import { infoTab, passwordTab, walletTab, purchasesTab } from "../../functions/profileTabs.js";
+import Purchases from "./PurchasesComponent.js";
 import UpdateInfo from "./UpdateInfoComponent.js";
 import UpdatePassword from "./UpdatePasswordComponent.js";
 import Wallet from "./WalletComponent.js";
@@ -15,6 +16,7 @@ function UserDataComponent(props){
                         <li className="nav-item" style={{cursor: "pointer"}}><a id="infoTab" className="nav-link active" onClick={infoTab} data-toggle="tab">Info</a></li>
                         <li className="nav-item" style={{cursor: "pointer"}}><a id="passwordTab" className="nav-link" onClick={passwordTab} data-toggle="tab">password</a></li>            
                         <li className="nav-item" style={{cursor: "pointer"}}><a id="walletTab" className="nav-link" onClick={walletTab} data-toggle="tab">Wallet</a></li>            
+                        <li className="nav-item" style={{cursor: "pointer"}}><a id="purchasesTab" className="nav-link" onClick={purchasesTab} data-toggle="tab">Purchases</a></li>            
                     </ul>
                 </div>
                 <div className="card-body">
@@ -27,6 +29,9 @@ function UserDataComponent(props){
                         </div>
                         <div className="tab-pane" id="wallet">
                             <Wallet user={props.user} />
+                        </div>
+                        <div className="tab-pane" id="purchases">
+                            <Purchases/>
                         </div>
                     </div>
                 </div>

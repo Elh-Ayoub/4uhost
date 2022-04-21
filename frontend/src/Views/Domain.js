@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../Components/LoaderComponent";
 import PlansDataService from "../services/Plans"
 
-function Domain(){
+function Domain(props){
     const [domainPlan, setDomainPlan] = useState({loading: false, data: null, error: null})
     const [domainName, setDomainName] = useState(null)
     useEffect(() => {
@@ -14,6 +14,13 @@ function Domain(){
             setDomainPlan({loading: false, data: null, error: error.response})
         })
     }, [])
+
+    const addDomaintoCart = () => {
+        props.addToCard(domainPlan.data[0].id)
+        localStorage.setItem("domainName", domainName)
+        setDomainName(null)
+        document.getElementById("input_domain_name").value = ""
+    }
 
     let content
     if(domainPlan.loading){
@@ -34,7 +41,7 @@ function Domain(){
                     <div className="col-md-10 offset-md-1">
                         <div className="form">
                             <div className="searchbar">
-                            <input className="search_input" type="text" placeholder="Search Domain" onChange={(e) => {setDomainName(e.target.value)}}/>
+                            <input className="search_input" id="input_domain_name" type="text" placeholder="Search Domain" onChange={(e) => {setDomainName(e.target.value)}}/>
                             <a href="#" className="search_icon"><i className="fa fa-search" aria-hidden="true"></i>
                             </a>
                             </div>
@@ -77,7 +84,7 @@ function Domain(){
                                 </div>
                             </div>
                             </div>
-                            <button className="read_more" id="add_to_cart" href="domain.html" onClick={() => {alert("active")}} disabled={(domainName) ? (false) : (true)}>Add to cart</button>
+                            <button className="read_more" id="add_to_cart" href="domain.html" onClick={addDomaintoCart} disabled={(domainName) ? (false) : (true)}>Add to cart</button>
                         </div>
                     </div>
                 </div>

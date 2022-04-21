@@ -26,6 +26,10 @@ class User {
         return http.post(`/users/${id}/fill-wallet`, data, { withCredentials: true })
     }
 
+    getPurchases(){
+        return http.get("/purchases", { withCredentials: true })
+    }
+
     contactUs(data){
         return http.post("/contact-us", data)
     }
