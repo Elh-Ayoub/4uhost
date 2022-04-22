@@ -15,6 +15,7 @@ import Cart from "./CartComponent";
 function Header(props){
    const [status, setStatus] = useState({loading: false, data: null, error: null})
    const [showCart, setShowCart] = useState(false);
+   const [shownav, setShownav] = useState(false);
    const navigate = useNavigate()
    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("shoppingCart")));
    const handleClose = () => setShowCart(false);
@@ -55,6 +56,9 @@ function Header(props){
          <PlanById id={id} key={id} removeFromCard={props.removeFromCard}/>
       )
    }
+   const showNavHandler = () => {
+      setShownav(!shownav)
+   }
    
     return (
         <div className="header">
@@ -72,10 +76,10 @@ function Header(props){
                {loader}
                <div className="col-md-6 col-sm-12">
                   <nav className="navigation navbar navbar-expand-md navbar-dark" style={{boxShadow: "none"}}>
-                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                     <button className="navbar-toggler" type="button" onClick={showNavHandler} data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>
                      </button>
-                     <div className="collapse navbar-collapse" id="navbarsExample04">
+                     <div className={(shownav) ? ("collapse navbar-collapse show") : ("collapse navbar-collapse")} id="navbar_col" onClick={() => {setShownav(false)}}>
                         <ul className="navbar-nav mr-auto">
                            <li className="nav-item active">
                               <Link to="/" className="nav-link p-3">Home</Link>

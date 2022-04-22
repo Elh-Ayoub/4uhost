@@ -93,6 +93,10 @@ function AvatarCard(props){
                         </li>
                         <hr/>
                         <li className="d-flex col-md-11 justify-content-between mx-auto">
+                            <b>Referral code</b> <a>{props.user.referral_code}</a>
+                        </li>
+                        <hr/>
+                        <li className="d-flex col-md-11 justify-content-between mx-auto">
                             <b>Profile picture</b>
                             <div>
                                 <label className="selectfile btn btn-outline-secondary mx-1" htmlFor="choosefile">Select picture</label>

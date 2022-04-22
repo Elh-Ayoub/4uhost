@@ -1,6 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarked, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+
 function Footer(){
     return(
         <footer>
@@ -33,11 +35,11 @@ function Footer(){
                      <div className="infoma">
                         <h3>Company.</h3>
                         <ul className="menu_footer">
-                           <li><a href="">Home</a></li>
-                           <li><a href="">About </a></li>
-                           <li><a href="">Domain</a></li>
-                           <li><a href="">Hosting</a></li>
-                           <li><a href="">Contact</a></li>
+                           <li><Link to="/">Home</Link></li>
+                           <li><Link to="/about">About</Link></li>
+                           <li><Link to="/domain">Domain</Link></li>
+                           <li><Link to="/hosting-plans">Hosting</Link></li>
+                           <li><Link to="/contact-us">Contact Us</Link></li>
                         </ul>
                      </div>
                   </div>
