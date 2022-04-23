@@ -16,6 +16,7 @@ import About from "./Views/About"
 import HostingPlans from "./Views/HostingPlans"
 import Domain from "./Views/Domain"
 import Contact from "./Views/Contact"
+import Support from "./Views/Support"
 
 function App() {
   const [layout, setLayout] = useState(true)
@@ -62,6 +63,7 @@ function App() {
           <Route path="/hosting-plans" element={<HostingPlans cart={cart} addToCard={addToCard} />}/>
           <Route path="/domain" element={<Domain addToCard={addToCard}/>}/>
           <Route path="/contact-us" element={<Contact/>}/>
+          <Route path="/support" element={<Support/>}/>
         </Routes>
       {layout && <Footer/>}
       </BrowserRouter>

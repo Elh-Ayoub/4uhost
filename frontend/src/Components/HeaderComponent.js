@@ -96,6 +96,11 @@ function Header(props){
                            <li className="nav-item">
                               <Link to="/contact-us" className="nav-link p-3">Contact Us</Link>
                            </li>
+                           {(props.user) ? (
+                           <li className="nav-item">
+                              <Link to="/support" className="nav-link p-3">Support</Link>
+                           </li>
+                           ):(null)}
                         </ul>
                      </div>
                   </nav>
