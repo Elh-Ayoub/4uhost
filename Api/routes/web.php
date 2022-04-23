@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminPaymentSettings;
 use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\AdminRoleController;
+use App\Http\Controllers\Admin\AdminSupportTicketController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Models\Purchase;
 use App\Models\Role;
@@ -86,4 +87,8 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     Route::get('purchases', function(){
         return view('Purchases.purchases', ['purchases' => Purchase::orderBy('created_at', 'desc')->simplePaginate(15)]);
     })->name('purchases');
+
+    /////////////////////// ---- Support tickets ---- ///////////////////////
+    Route::get('/tickets', [AdminSupportTicketController::class, 'index'])->name('tickets.list');
+    Route::patch('/tickets/{id}', [AdminSupportTicketController::class, 'updateStatus'])->name('tickets.update');
 });

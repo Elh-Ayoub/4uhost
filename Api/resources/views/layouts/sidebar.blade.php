@@ -97,6 +97,12 @@
                   <p>Purchases</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('tickets.list')}}" class="nav-link @if(Request::url() === route('tickets.list')) active @endif">
+                  <i class="fas fa-headset"></i>
+                  <p>Support tickets</p>
+                </a>
+              </li>
             </ul>
         </nav>
     </div>

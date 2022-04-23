@@ -32,3 +32,17 @@ $(".plan_type").change(function (e) {
         $(".input_quantity").fadeIn();
     }
 });
+
+/*
+    keyup function for searching tickets by id (without '#') 
+*/
+
+$("#search_ticket_id").keyup((e) => {
+    $(".ticket").each((idx, element) => {
+        if($(element).find(".ticket_id").text().indexOf(e.target.value) > -1){
+            $(element).show();
+        }else{
+            $(element).hide();
+        }
+    })
+})

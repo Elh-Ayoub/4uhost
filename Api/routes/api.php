@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -65,3 +66,11 @@ Route::get("/purchases", [PurchaseController::class, 'getUserPurchases'])->middl
 
 /////////////////////// ---- Contact us ---- ///////////////////////
 Route::post("/contact-us", [UserController::class, 'contactUs']);
+
+/////////////////////// ---- Support tickets ---- ///////////////////////
+Route::get('/tickets', [SupportTicketController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/tickets/{id}', [SupportTicketController::class, 'show'])->middleware('auth:sanctum');
+Route::get('/users/{id}/tickets', [SupportTicketController::class, 'showUsersTickets'])->middleware('auth:sanctum');
+Route::post('/tickets', [SupportTicketController::class, 'store'])->middleware('auth:sanctum');
+Route::patch('/tickets/{id}', [SupportTicketController::class, 'updateStatus'])->middleware('auth:sanctum');
+Route::delete('/tickets/{id}', [SupportTicketController::class, 'destroy'])->middleware('auth:sanctum');
