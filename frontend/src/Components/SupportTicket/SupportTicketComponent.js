@@ -45,6 +45,9 @@ function SupportTicket(props){
                 <div>{new Date(ticket.created_at).toUTCString()}</div>
             </div>
         )
+        if(tickets.data.length == 0){
+            content = <p className="small">No ticket created yet</p>
+        }
     }
     return content
 }

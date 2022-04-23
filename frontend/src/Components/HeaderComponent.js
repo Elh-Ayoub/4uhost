@@ -64,7 +64,7 @@ function Header(props){
         <div className="header">
          <div className="container">
             <div className="row d_flex">
-               <div className=" col-md-2 col-sm-3 col logo_section">
+               <div className=" col-md-1 col-sm-3 col logo_section">
                   <div className="full">
                      <div className="center-desk">
                         <div className="logo">
@@ -74,7 +74,7 @@ function Header(props){
                   </div>
                </div>
                {loader}
-               <div className="col-md-6 col-sm-12">
+               <div className="col-md-7 col-sm-12">
                   <nav className="navigation navbar navbar-expand-md navbar-dark" style={{boxShadow: "none"}}>
                      <button className="navbar-toggler" type="button" onClick={showNavHandler} data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>

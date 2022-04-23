@@ -42,6 +42,11 @@ function SubmitTicket(){
             <div className="mx-auto">{loader}</div>
             <form className="main_form" onSubmit={(e) => {createTicket(e.preventDefault())}}>
                 <div className="row">
+                <div className="col-md-12">
+                        <div className="titlepage text_align_center">
+                            <h2>Submit Support <span className="blue_light">ticket</span></h2>
+                        </div>
+                    </div>
                     <div className="col-md-12">
                         <input className="contactus" id="subject" placeholder="Subject" type="type" onChange={(e) => {setSubject(e.target.value)}}/>                          
                     </div>

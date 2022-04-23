@@ -31,6 +31,7 @@ function Support(){
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-3 tickets">
+                            <p>Your tickets</p>
                             <SupportTicket user={user.user}/>
                         </div>
                         <div className="col-sm-9">
