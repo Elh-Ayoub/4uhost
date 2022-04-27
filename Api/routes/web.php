@@ -62,6 +62,7 @@ Route::group([ 'middleware' => 'auth:sanctum','prefix' => 'admin',], function ()
     Route::delete('users/{id}',[AdminUserController::class, 'destroy'])->name('users.delete');
     //wallet
     Route::post("/users/{id}/fill-wallet", [AdminUserController::class, 'fillWallet'])->name('add.balance');
+    Route::post("/users/fill-wallet/razorpay", [AdminUserController::class, 'razorPayment'])->name('add.balance.razorpay');
     /////////////////////// ----Role module---- ///////////////////////
     Route::get('roles', [AdminRoleController::class, 'index'])->name('roles.admin');
     Route::post('roles', [AdminRoleController::class, 'store'])->name('roles.admin.create');

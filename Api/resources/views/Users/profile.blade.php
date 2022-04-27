@@ -183,7 +183,8 @@
                             <input type="email" class="form-control" value="{{$user->referral_points * $value_of_referral_points}}" readonly>
                           </div>
                         </div>
-                        <button class="btn btn-primary mt-2"  data-toggle="modal" data-target="#add-balence-{{$user->id}}">Add wallet balance</button>
+                        <button class="btn btn-primary mt-2"  data-toggle="modal" data-target="#add-balence-{{$user->id}}">Add wallet balance (Stripe)</button>
+                        <button class="btn btn-success mt-2"  data-toggle="modal" data-target="#add-balence-{{$user->id}}-razorpay">Add wallet balance (Razorpay)</button>
                     </div>
                   <!-- /.tab-pane -->
                 </div>

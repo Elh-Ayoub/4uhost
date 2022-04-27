@@ -174,6 +174,32 @@ class UserController extends Controller
         return response(['status' => 'fail', 'message' => "Insufficient available balance, or invalid or expired card"], 400);
     }
 
+    public function razorPayment(Request $request)
+    {        
+        $validator = Validator::make($request->all(), [
+            'razorpay_payment_id' => 'required'
+        ]);
+        if($validator->fails()){
+            return response(['status' => 'fail-arr', 'message' => $validator->errors()->toArray()], 400);
+        }
+        $input = $request->all();
+        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $payment = $api->payment->fetch($input['razorpay_payment_id']);
+
+        if(count($input)  && !empty($input['razorpay_payment_id']))
+        {
+            try 
+            {
+                $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount'=>$payment['amount'])); 
+            } 
+            catch (\Exception $e) 
+            {
+                return response(['status' => 'fail', 'message' => $e->getMessage()], 400);
+            }            
+        }
+        return response(['status' => 'success', 'message' => 'Payment successful, your order will be despatched in the next 48 hours.']);
+    }
+
     public function contactUs(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
