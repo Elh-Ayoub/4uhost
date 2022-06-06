@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -74,3 +75,7 @@ Route::get('/users/{id}/tickets', [SupportTicketController::class, 'showUsersTic
 Route::post('/tickets', [SupportTicketController::class, 'store'])->middleware('auth:sanctum');
 Route::patch('/tickets/{id}', [SupportTicketController::class, 'updateStatus'])->middleware('auth:sanctum');
 Route::delete('/tickets/{id}', [SupportTicketController::class, 'destroy'])->middleware('auth:sanctum');
+
+/////////////////////// ---- User storage module ---- ///////////////////////
+Route::post('/storage/upload', [StorageController::class, 'upload'])->middleware('auth:sanctum');
+Route::patch('/storage/update', [StorageController::class, 'updateFileContent'])->middleware('auth:sanctum');
