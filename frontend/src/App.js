@@ -17,6 +17,7 @@ import HostingPlans from "./Views/HostingPlans"
 import Domain from "./Views/Domain"
 import Contact from "./Views/Contact"
 import Support from "./Views/Support"
+import Storage from "./Views/Strorage"
 
 function App() {
   const [layout, setLayout] = useState(true)
@@ -64,6 +65,7 @@ function App() {
           <Route path="/domain" element={<Domain addToCard={addToCard}/>}/>
           <Route path="/contact-us" element={<Contact/>}/>
           <Route path="/support" element={<Support/>}/>
+          <Route path="/storage" element={<Storage/>}/>
         </Routes>
       {layout && <Footer/>}
       </BrowserRouter>

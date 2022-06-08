@@ -11,6 +11,7 @@ import AuthDataServices from "../services/Auth"
 import Modal from 'react-bootstrap/Modal'
 import PlanById from "./PlanComponent";
 import Cart from "./CartComponent";
+import Dropdown from "react-bootstrap/Dropdown"
 
 function Header(props){
    const [status, setStatus] = useState({loading: false, data: null, error: null})
@@ -59,7 +60,7 @@ function Header(props){
    const showNavHandler = () => {
       setShownav(!shownav)
    }
-   
+
     return (
         <div className="header">
          <div className="container">
@@ -74,7 +75,7 @@ function Header(props){
                   </div>
                </div>
                {loader}
-               <div className="col-md-7 col-sm-12">
+               <div className="col-md-6 col-sm-12">
                   <nav className="navigation navbar navbar-expand-md navbar-dark" style={{boxShadow: "none"}}>
                      <button className="navbar-toggler" type="button" onClick={showNavHandler} data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>
@@ -94,7 +95,7 @@ function Header(props){
                               <Link to="/domain" className="nav-link p-3">Domain</Link>
                            </li>
                            <li className="nav-item">
-                              <Link to="/contact-us" className="nav-link p-3">Contact Us</Link>
+                              <Link to="/contact-us" className="nav-link p-3">Contact</Link>
                            </li>
                            {(props.user) ? (
                            <li className="nav-item">
@@ -105,7 +106,7 @@ function Header(props){
                      </div>
                   </nav>
                </div>
-               <div className="col-md-4 d_none">
+               <div className="col-md-5 d_none">
                   <ul className="email d_flex align-items-center justify-content-end">
                      <li>
                         <a onClick={handleShow} style={{color: "white", cursor: "pointer"}}>
@@ -120,6 +121,14 @@ function Header(props){
                               <span className="username ml-2">{props.user.username}</span>
                            </Link>
                         </li>
+                        
+                     ) : (null)}
+                      {(props.user) ? (
+                        <li>
+                           <Link to="/storage">
+                              <i className="fas fa-box-open nav-icon mx-2"></i>
+                           </Link>
+                        </li> 
                      ) : (null)}
                      {(props.user) ? (
                         <li>
