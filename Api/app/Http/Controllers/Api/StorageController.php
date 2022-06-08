@@ -11,6 +11,51 @@ use Illuminate\Support\Facades\Auth;
 
 class StorageController extends Controller
 {
+
+    public function index(){
+        $user = Auth::user();
+        if(!$user){
+            return response(['status' => 'fail', 'message' => 'Operation forbidden'], 403);
+        }
+        $check = $this->checkPurchases();
+        $check = json_decode($check->content());
+        if($check->status != "success"){
+            return response(['status' => 'fail', 'message' => "You don't have any storage plan!"], 404);
+        }
+
+        $dir  = public_path('storage/' . Auth::id());
+        if(!file_exists($dir)){
+            mkdir($dir);
+        }
+
+        $dh = scandir($dir);
+        $content = array();
+    
+        foreach ($dh as $folder) {
+            if ($folder != '.' && $folder != '..') {
+                if (is_dir($dir . '/' . $folder)) {
+                    $content[] = array($folder => listFolders($dir . '/' . $folder));
+                } else {
+                    $content[] = $folder;
+                }
+            }
+        }
+        return response(['status' => 'success', 'message' => $content]);
+    
+    }
+
+    public function show($file){
+        $user = Auth::user();
+        if(!$user){
+            return response(['status' => 'fail', 'message' => 'Operation forbidden'], 403);
+        }
+        $dir  = public_path('storage/' . Auth::id());
+        if(!file_exists($dir. "/" .$file)){
+            return response(['status' => 'fail', 'message' => "File not found!"], 404);
+        }
+        return response(['status' => 'success', 'message' => file_get_contents($dir. "/" .$file)]);
+    }
+
     public function checkPurchases(){
         $user = Auth::user();
         if(!$user){

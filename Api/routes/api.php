@@ -77,5 +77,7 @@ Route::patch('/tickets/{id}', [SupportTicketController::class, 'updateStatus'])-
 Route::delete('/tickets/{id}', [SupportTicketController::class, 'destroy'])->middleware('auth:sanctum');
 
 /////////////////////// ---- User storage module ---- ///////////////////////
+Route::get('/storage/content', [StorageController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/storage/content/{file}', [StorageController::class, 'show'])->middleware('auth:sanctum');
 Route::post('/storage/upload', [StorageController::class, 'upload'])->middleware('auth:sanctum');
 Route::patch('/storage/update', [StorageController::class, 'updateFileContent'])->middleware('auth:sanctum');
