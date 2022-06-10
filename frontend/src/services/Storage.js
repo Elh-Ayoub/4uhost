@@ -9,17 +9,14 @@ class Storage {
         return http.get(`/storage/content/${file}`, { withCredentials: true })
     }
 
-    // logout(){
-    //     return http.post("/auth/logout", null, { withCredentials: true })
-    // }
+    update(data){
+        return http.patch("/storage/update", data, { withCredentials: true })
+    }
 
-    // forgotPassword(data){
-    //     return http.post("/auth/forgot-password", data)
-    // }
+    upload(data){
+        return http.post("/storage/upload", data, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
 
-    // user(){
-    //     return http.get("/auth/user", { withCredentials: true })
-    // }
+    }
 }
 
 export default new Storage()
